@@ -36,25 +36,20 @@ Experience GridCraft here: **[GridCraft Live](https://rohan-shridhar.github.io/g
 
 
 1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Rohan-Shridhar/gridcraft.git
+    ```bash
+    git clone https://github.com/Rohan-Shridhar/gridcraft.git
 
 2. **Navigate to the project folder**
 
     ```bash
     cd gridcraft
-    # Open in your browser
 
-3. Open in your browser
+3. **Start local server**
     ```bash
-    # On Mac:
-    open index.html
+    # Serves on localhost:8000
+    python -m http.server
 
-    # On Windows:
-    start index.html
-    
-    # Or simply double-click index.html in your file explorer
-4. Start exploring! Edit the .jsx files in the src/ folder and refresh your browser to see changes instantly.
+4. **Open localhost:8000 in your browser and start exploring! Edit the .jsx files in the src/ folder and refresh your browser to see changes instantly.**
 
 
 ## Repository Structure 📁
