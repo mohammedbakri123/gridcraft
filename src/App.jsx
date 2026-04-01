@@ -1,7 +1,7 @@
 const { useState } = React;
 
 const TOTAL_CELLS = 14;
-const MAX_HISTORY = 5;
+const MAX_HISTORY = 15;
 const DEFAULT_COLOR = '#2a2a2a';
 
 const App = () => {

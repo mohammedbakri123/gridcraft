@@ -5,7 +5,7 @@ const Tools = ({ undo, redo, canUndo, canRedo, selectedColor, setSelectedColor, 
                 className={`tool-btn${!canUndo ? ' tool-btn--disabled' : ''}`}
                 onClick={undo}
                 disabled={!canUndo}
-                title="Undo (last 5)"
+                title="Undo"
             >
                 <i className="fa-solid fa-rotate-left"></i>
             </button>
@@ -13,7 +13,7 @@ const Tools = ({ undo, redo, canUndo, canRedo, selectedColor, setSelectedColor, 
                 className={`tool-btn${!canRedo ? ' tool-btn--disabled' : ''}`}
                 onClick={redo}
                 disabled={!canRedo}
-                title="Redo (last 5)"
+                title="Redo"
             >
                 <i className="fa-solid fa-rotate-right"></i>
             </button>
