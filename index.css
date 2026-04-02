@@ -21,6 +21,10 @@ body {
   min-height: 100vh;
   width: 100vw;
   background-color: var(--bg-color);
+  background-image: url("src/images/bg2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: var(--text-color);
 }
 #root {
@@ -64,7 +68,6 @@ header {
   gap: 1rem;
   height: 10vh;
   width: 100vw;
-  background-color: var(--menu-bg-color);
   color: var(--menu-text-color);
 }
 .menu-btn {
@@ -130,7 +133,6 @@ header {
   gap: 0.75rem;
   height: 8vh;
   width: 100vw;
-  background-color: var(--tools-bg-color);
   color: var(--tools-text-color);
 }
 .tool-btn {
