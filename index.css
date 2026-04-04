@@ -8,7 +8,7 @@
   --menu-bg-color: #1a1a1a;
   --menu-text-color: #e5e5e5;
   --grid-box-size: 3vh;
-  --grid-box-count: 14;
+  --grid-box-count: 15;
   --grid-bg-color: #1a1a1a;
   --grid-text-color: #e5e5e5;
   --tools-bg-color: #1a1a1a;
@@ -18,6 +18,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-height: 100vh;
   width: 100vw;
   background-color: var(--bg-color);
@@ -202,7 +203,9 @@ header {
 
   z-index: 9999;
 
-  animation: toast-slide-in 0.3s ease, toast-fade-out 0.3s ease 2.7s forwards;
+  animation:
+    toast-slide-in 0.3s ease,
+    toast-fade-out 0.3s ease 2.7s forwards;
 }
 
 .toast.success {

@@ -1,6 +1,6 @@
 const { useState, useRef } = React;
 
-const TOTAL_CELLS = 14;
+const TOTAL_CELLS = 15;
 const MAX_HISTORY = 15;
 const DEFAULT_COLOR = '#2a2a2a';
 
