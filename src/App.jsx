@@ -15,6 +15,8 @@ const App = () => {
   const [future, setFuture] = useState([]);
   const [selectedColor, setSelectedColor] = useState('#e63946');
   const [isEraser, setIsEraser] = useState(false);
+  const [isFill, setIsFill] = useState(false);
+  const [showGrid, setShowGrid] = useState(true);
   const [toast, setToast] = useState(null);
 
   const fileInputRef = useRef(null);
@@ -34,14 +36,58 @@ const App = () => {
 
   const triggerImport = () => fileInputRef.current?.click();
 
+  const floodFill = (cells, index, targetColor, fillColor) => {
+    if (targetColor === fillColor) return cells;
+    const newCells = [...cells];
+    const stack = [index];
+    const visited = new Set();
+
+    while (stack.length > 0) {
+      const idx = stack.pop();
+      if (visited.has(idx)) continue;
+
+      const row = Math.floor(idx / gridSize);
+      const col = idx % gridSize;
+
+      if (row < 0 || row >= gridSize || col < 0 || col >= gridSize) continue;
+      if (newCells[idx] !== targetColor) continue;
+
+      newCells[idx] = fillColor;
+      visited.add(idx);
+
+      // Left (only if not on left edge)
+      if (col > 0) stack.push(idx - 1);
+      // Right (only if not on right edge)
+      if (col < gridSize - 1) stack.push(idx + 1);
+      // Up
+      if (row > 0) stack.push(idx - gridSize);
+      // Down
+      if (row < gridSize - 1) stack.push(idx + gridSize);
+    }
+
+    return newCells;
+  };
+
   const paintCell = useCallback((index) => {
+    if (isFill) {
+      const targetColor = cells[index];
+      const fillColor = selectedColor;
+      const newCells = floodFill(cells, index, targetColor, fillColor);
+      if (newCells === cells) return;
+
+      setHistory(prev => [...prev.slice(-MAX_HISTORY + 1), cells]);
+      setFuture([]);
+      setCells(newCells);
+      return;
+    }
+
     const newCells = [...cells];
     newCells[index] = isEraser ? DEFAULT_COLOR : selectedColor;
 
     setHistory(prev => [...prev.slice(-MAX_HISTORY + 1), cells]);
     setFuture([]);
     setCells(newCells);
-  }, [cells, isEraser, selectedColor]);
+  }, [cells, isEraser, isFill, selectedColor, gridSize]);
 
   const undo = () => {
     if (!history.length) return;
@@ -156,7 +202,7 @@ const App = () => {
 
       {toast && <div className={`toast ${toast.type}`}>{toast.msg}</div>}
 
-      <Grid cells={cells} gridSize={gridSize} paintCell={paintCell} />
+      <Grid cells={cells} gridSize={gridSize} showGrid={showGrid} isFill={isFill} paintCell={paintCell} />
 
       <div className="grid-size-selector">
         <span className="grid-size-label">Grid:</span>
@@ -169,6 +215,13 @@ const App = () => {
             {size}×{size}
           </button>
         ))}
+        <button
+          className={`grid-size-btn${showGrid ? ' grid-size-btn--active' : ''}`}
+          onClick={() => setShowGrid(s => !s)}
+          title="Toggle grid lines"
+        >
+          <i className="fa-solid fa-border-all"></i>
+        </button>
       </div>
 
       <Tools
@@ -180,6 +233,8 @@ const App = () => {
         setSelectedColor={setSelectedColor}
         isEraser={isEraser}
         setIsEraser={setIsEraser}
+        isFill={isFill}
+        setIsFill={setIsFill}
         clearAll={clearAll}
       />
 

@@ -128,7 +128,7 @@ header {
   display: grid;
   grid-template-columns: repeat(var(--grid-box-count), var(--grid-box-size));
   grid-template-rows: repeat(var(--grid-box-count), var(--grid-box-size));
-  gap: 2px;
+  gap: var(--grid-gap, 2px);
   padding: 1.5rem;
   background-color: var(--bg-color);
 }
