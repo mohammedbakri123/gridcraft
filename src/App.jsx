@@ -97,6 +97,8 @@ const App = () => {
 
   const paintCell = useCallback(
     (index) => {
+      if (!showGrid) return;
+
       if (isFill) {
         const targetColor = cells[index];
         const fillColor = selectedColor;
@@ -116,7 +118,7 @@ const App = () => {
       setFuture([]);
       setCells(newCells);
     },
-    [cells, isEraser, isFill, selectedColor, gridSize]
+    [cells, isEraser, isFill, selectedColor, gridSize, showGrid]
   );
 
   const undo = () => {
@@ -246,20 +248,19 @@ const App = () => {
         {GRID_SIZES.map((size) => (
           <button
             key={size}
-            className={`grid-size-btn${
-              gridSize === size ? " grid-size-btn--active" : ""
-            }`}
+            className={`grid-size-btn${gridSize === size ? " grid-size-btn--active" : ""
+              }`}
             onClick={() => changeGridSize(size)}
           >
             {size}×{size}
           </button>
         ))}
         <button
-          className={`grid-size-btn${showGrid ? " grid-size-btn--active" : ""}`}
+          className={`grid-size-btn${!showGrid ? " grid-size-btn--active" : ""}`}
           onClick={() => setShowGrid((s) => !s)}
           title="Toggle grid lines"
         >
-          <i className="fa-solid fa-border-all"></i>
+          <i class="fa-solid fa-eye"></i>
         </button>
       </div>
 

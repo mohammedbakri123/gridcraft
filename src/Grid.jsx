@@ -15,10 +15,10 @@ const Grid = ({ cells, gridSize, gridGap, showGrid, isFill, paintCell }) => {
                         backgroundColor: color || '#2a2a2a',
                         border: showGrid ? undefined : 'none',
                         borderRadius: showGrid ? undefined : '0',
-                        cursor: isFill ? 'cell' : 'crosshair',
+                        cursor: !showGrid ? 'not-allowed' : (isFill ? 'cell' : 'crosshair'),
                     }}
-                    onMouseDown={() => { paintCell(i); setIsMouseDown(true); }}
-                    onMouseEnter={() => isMouseDown && !isFill && paintCell(i)}
+                    onMouseDown={() => { if (showGrid) { paintCell(i); setIsMouseDown(true); } }}
+                    onMouseEnter={() => showGrid && isMouseDown && !isFill && paintCell(i)}
                     onMouseUp={() => setIsMouseDown(false)}
                 />
             ))}
