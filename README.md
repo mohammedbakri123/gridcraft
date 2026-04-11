@@ -141,8 +141,8 @@ gridcraft/
 
 Thanks to these amazing people who contributed ❤️
 
-<a href="https://github.com/Rohan-Shridhar/gridcraft/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Rohan-Shridhar/gridcraft"/>
+<a href="https://github.com/rohan-shridhar/gridcraft/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=rohan-shridhar/gridcraft" />
 </a>
 
 
