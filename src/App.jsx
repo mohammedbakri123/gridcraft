@@ -26,6 +26,7 @@ const App = () => {
   const [isFill, setIsFill] = useState(false);
   const [showGrid, setShowGrid] = useState(true);
   const [toast, setToast] = useState(null);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768 || window.innerHeight < 768);
 
   const fileInputRef = useRef(null);
 
@@ -35,10 +36,16 @@ const App = () => {
       e.returnValue = "";
     };
 
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768 || window.innerHeight < 768);
+    };
+
     window.addEventListener("beforeunload", handleBeforeUnload);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -245,7 +252,7 @@ const App = () => {
 
       <div className="grid-size-selector">
         <span className="grid-size-label">Grid:</span>
-        {GRID_SIZES.map((size) => (
+        {GRID_SIZES.filter(size => isSmallScreen ? size <= 32 : true).map((size) => (
           <button
             key={size}
             className={`grid-size-btn${gridSize === size ? " grid-size-btn--active" : ""
